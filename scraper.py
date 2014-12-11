@@ -21,3 +21,13 @@
 # on Morph for Python (https://github.com/openaustralia/morph-docker-python/blob/master/pip_requirements.txt) and all that matters
 # is that your final data is written to an Sqlite database called data.sqlite in the current working directory which
 # has at least a table called data.
+
+import scraperwiki
+import lxml.html
+import bs4
+
+html = scraperwiki.scrape("http://www.roh.org.uk/productions/alices-adventures-in-wonderland-by-christopher-wheeldon")
+root = lxml.html.fromstring(html)
+root.cssselect("div[align='left']")
+scraperwiki.sqlite.save(unique_keys=['name'], data={"name": "susan", "occupation": "software developer"})
+scraperwiki.sql.select("* from data where 'name'='peter'")
